@@ -1,16 +1,21 @@
 <?php
-require 'TopicData.php';
+require_once '../src/Suggestotron/Config.php';
+\Suggestotron\Config::setDirectory('../config');
 
-$data = new TopicData();
-$data->connect();
+$config = \Suggestotron\Config::get('autoload');
+require_once $config['class_path'] . '/Suggestotron/Autoloader.php';
 
-$topics = $data->getAllTopics();
-
-foreach ($topics as $topic) {
-	# code...
-	echo "<h3>" .$topic['title']. " (ID: " .$topic['id']. ")</h3>";
-	echo "<p>";
-	echo nl2br($topic["description"]);
-	echo "<p>";
+if(!isset($_SERVER['PATH_INFO']) || empty($_SERVER['PATH_INFO']) || $_SERVER['PATH_INFO'] == '/')
+{
+	$route = 'list';
 }
+else
+{
+	$route = $_SERVER['PATH_INFO'];
+}
+
+var_dump($route);
+
+$router = new \Suggestotron\Router();
+$router->start($route);
 ?>
