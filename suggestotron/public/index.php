@@ -5,13 +5,13 @@ require_once '../src/Suggestotron/Config.php';
 $config = \Suggestotron\Config::get('autoload');
 require_once $config['class_path'] . '/Suggestotron/Autoloader.php';
 #var_dump($_SERVER);
-if(!isset($_SERVER['REQUEST_URI']) || empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] == '/')
+if(!isset($_SERVER['REDIRECT_URL']) || empty($_SERVER['REDIRECT_URL']) || $_SERVER['REDIRECT_URL'] == '/')
 {
 	$route = 'list';
 }
 else
 {
-	$route = $_SERVER['REQUEST_URI'];
+	$route = $_SERVER['REDIRECT_URL'];
 }
 
 var_dump($route);
