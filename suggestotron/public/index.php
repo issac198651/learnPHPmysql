@@ -4,14 +4,14 @@ require_once '../src/Suggestotron/Config.php';
 
 $config = \Suggestotron\Config::get('autoload');
 require_once $config['class_path'] . '/Suggestotron/Autoloader.php';
-
-if(!isset($_SERVER['PATH_INFO']) || empty($_SERVER['PATH_INFO']) || $_SERVER['PATH_INFO'] == '/')
+#var_dump($_SERVER);
+if(!isset($_SERVER['REQUEST_URI']) || empty($_SERVER['REQUEST_URI']) || $_SERVER['REQUEST_URI'] == '/')
 {
 	$route = 'list';
 }
 else
 {
-	$route = $_SERVER['PATH_INFO'];
+	$route = $_SERVER['REQUEST_URI'];
 }
 
 var_dump($route);
