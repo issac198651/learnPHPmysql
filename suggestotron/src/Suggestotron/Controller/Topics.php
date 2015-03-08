@@ -1,22 +1,14 @@
 <?php
 namespace Suggestotron\Controller;
 
-class Topics 
+class Topics extends \Suggestotron\Controller
 {
-	protected $config;
 	protected $data;
-	protected $template;
 
 	public function __construct()
 	{
-		$this->config = \Suggestotron\Config::get('site');
-		$this->data = new \Suggestotron\TopicData();
-		$this->template = new \Suggestotron\Template($this->config['view_path'] . "/base.phtml");
-	}
-
-	protected function render($template, $data = array())
-	{
-		$this->template->render($this->config['view_path'] . "/" . $template, $data);
+		parent::__construct();
+    	$this->data = new \Suggestotron\TopicData();
 	}
 
 	public function listAction()
@@ -38,7 +30,7 @@ class Topics
 		$this->render("index/add.phtml");	
 	}
 
-	public function editAction()
+	public function editAction($options)
 	{
 		if(isset($_POST['id']) && !empty($_POST['id']))
 		{
@@ -54,13 +46,13 @@ class Topics
 			}
 		}
 		
-		if(!isset($_GET['id']) || empty($_GET['id']))
+		if(!isset($options['id']) || empty($options['id']))
 		{
 			echo "You did not pass in an ID.";
 			exit;
 		}
 		
-		$topic = $this->data->getTopic($_GET['id']);
+		$topic = $this->data->getTopic($options['id']);
 		
 		if($topic === false)
 		{
@@ -71,15 +63,15 @@ class Topics
 		$this->render("index/edit.phtml", ['topic' => $topic]);
 	}
 
-	public function deleteAction()
+	public function deleteAction($options)
 	{
-		if(!isset($_GET['id']) || empty($_GET['id'])) 
+		if(!isset($options['id']) || empty($options['id'])) 
 		{
 			echo "You did not pass in an ID";
 			exit;
 		}
 		
-		$topic = $this->data->getTopic($_GET['id']);
+		$topic = $this->data->getTopic($options['id']);
 		
 		if($topic === false)
 		{
@@ -87,9 +79,9 @@ class Topics
 			exit;
 		}
 		
-		if($this->data->delete($_GET['id']))
+		if($this->data->delete($options['id']))
 		{
-			header("Location: /index.php");
+			header("Location: /");
 			exit;
 		}
 		else
