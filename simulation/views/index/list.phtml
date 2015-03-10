@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>ServerName</th>
+        <th>BaseLine</th>
+        <th>Type</th>
+        <th>User</th>
+        <th>Phone</th>
+        <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    $servers = $this->servers;
+    foreach ($servers as $server) {
+      echo "<tr>";
+      echo "<td>" .$server['ServerName'] . "</td>";
+      echo "<td>" .$server['BaseLine'] . "</td>";
+      echo "<td>" .$server['Type'] . "</td>";
+      echo "<td>" .$server['User'] . "</td>";
+      echo "<td>" .$server['Phone'] . "</td>";
+      echo "<td>" .$server['Comment'] . "</td>";
+      echo "<td><a href='/server/edit/" .$server['serverID']. "' class='btn btn-primary'>Edit</a>";
+      echo " ";
+      echo "<a href='/server/delete/" .$server['serverID']. "' class='btn btn-danger'>Delete</a>";
+      echo "</td>";
+      echo "</tr>";
+    }
+    ?>
+  </tbody>
+</table>

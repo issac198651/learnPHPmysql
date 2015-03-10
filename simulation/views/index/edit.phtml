@@ -1,0 +1,20 @@
+<?php
+$server = $this->server;
+?>
+<h2>Edit Server</h2>
+<form action="/server/edit" method="POST">
+    <label>
+        ServerName: <input type="text" name="ServerName" value="<?=$server['ServerName'];?>">
+    </label>
+    <br>
+    <label>
+        BaseLine: <input type="text" name="BaseLine" value="<?=$server['BaseLine'];?>">
+    </label>
+    <br>
+    <label>
+        Type: <input type="text" name="Type" value="<?=$server['Type'];?>">
+    </label>
+    <br>
+    <input type="hidden" name="serverID" value="<?=$server['serverID'];?>">
+    <input type="submit" value="Edit Server">
+</form>

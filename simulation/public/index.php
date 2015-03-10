@@ -1,21 +1,18 @@
 <?php
-require 'ServerData.php';
+require_once '../src/simulation/Config.php';
+\simulation\Config::setDirectory('../config');
 
-$data = new ServerData();
-$data->connect();
+$config = \simulation\Config::get('autoload');
+require_once $config['class_path'] . '/simulation/Autoloader.php';
 
-$servers = $data->getAllServers();
-
-foreach ($servers as $server) {
-    echo "<table>";
-    echo "<tr>";
-    echo "<td>" .$server['ServerName'] . "</td>";
-    echo "<td>" .$server['BaseLine'] . "</td>";
-    echo "<td>" .$server['Type'] . "</td>";
-    echo "<td>" .$server['User'] . "</td>";
-    echo "<td>" .$server['Phone'] . "</td>";
-    echo "<td>" .$server['Comment'] . "</td>";
-    echo "</tr>";
-    echo "</table>";
+#var_dump($_SERVER);
+$route = null;
+if (isset($_SERVER['REQUEST_URI'])) {
+    $route = $_SERVER['REQUEST_URI'];
 }
+
+#var_dump($route);
+
+$router = new \simulation\Router();
+$router->start($route);
 ?>
