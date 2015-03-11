@@ -22,7 +22,7 @@
       echo "<td>" .$server['Comment'] . "</td>";
       echo "<td><a href='/server/edit/" .$server['serverID']. "' class='btn btn-primary'>Edit</a>";
       echo " ";
-      echo "<a href='/server/delete/" .$server['serverID']. "' class='btn btn-danger'>Delete</a>";
+      echo "<a href='/server/delete/" .$server['serverID']. "' class='btn btn-danger' data-toggle='popover' data-trigger='hover' data-placement='top' data-title='Are you sure?' data-content=' This cannot be undone!'>Delete</a>";
       echo "</td>";
       echo "</tr>";
     }

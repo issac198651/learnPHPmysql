@@ -1,25 +1,13 @@
 <?php
-namespace simulation;
+namespace simulation\Model;
 
-class ServerData
-{
-	protected $connection = null;
-
-	public function __construct()
-	{
-		$this->connect();
-	}
-
-	public function connect()
-	{
-		$config = \simulation\Config::get('database');
-
-		$this->connection = new \PDO("mysql:host=" .$config['hostname']. ";dbname=" .$config['dbname'], $config['username'], $config['password']);
-	}
+class Servers {
 
 	public function getAllServers()
     {
-        $query = $this->connection->prepare("SELECT * FROM servers");
+    	$sql = "SELECT * FROM servers";
+
+        $query = \simulation\Db::getInstance()->prepare($sql);
         $query->execute();
 
         return $query;
@@ -27,8 +15,7 @@ class ServerData
 
     public function add($data)
     {
-    	$query = $this->connection->prepare(
-    		"INSERT INTO servers (
+    	$sql = "INSERT INTO servers (
     			ServerName,
     			BaseLine,
     			Type
@@ -36,21 +23,22 @@ class ServerData
     			:ServerName,
     			:BaseLine,
     			:Type
-    		)"
-    	);
+    		)";
+    	$query = \simulation\Db::getInstance()->prepare($sql);
 
     	$data = [
     		':ServerName' => $data['ServerName'],
     		':BaseLine' => $data['BaseLine'],
     		':Type' => $data['Type']
     	];
+
         $query->execute($data);
     }
 
     public function getServer($serverID)
     {
     	$sql = "SELECT * FROM servers WHERE serverID = :serverID LIMIT 1";
-		$query = $this->connection->prepare($sql);
+		$query = \simulation\Db::getInstance()->prepare($sql);
 
 		$values = [':serverID' => $serverID];
 		$query->execute($values);
@@ -60,15 +48,14 @@ class ServerData
 
     public function update($data)
 	{
-	    $query = $this->connection->prepare(
-	        "UPDATE servers 
+		$sql = "UPDATE servers 
 	            SET 
 	                ServerName = :ServerName, 
 	                BaseLine = :BaseLine,
 	                Type = :Type
 	            WHERE
-	                serverID = :serverID"
-	    );
+	                serverID = :serverID";
+	    $query = \simulation\Db::getInstance()->prepare($sql);
 	
 	    $data = [
 	        ':serverID' => $data['serverID'],
@@ -82,11 +69,11 @@ class ServerData
 
     public function delete($serverID)
     {
-    	$query = $this->connection->prepare(
-    	    "DELETE FROM servers
+    	$sql = "DELETE FROM servers
 	    	        WHERE
-	    	            serverID = :serverID"
-	    	);
+	    	            serverID = :serverID";
+	    	            
+    	$query = \simulation\Db::getInstance()->prepare($sql);
 	
 	    	$data = [
 	    	    ':serverID' => $serverID,

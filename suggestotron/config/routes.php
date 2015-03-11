@@ -21,6 +21,7 @@
 return [
     'default' => '/topic/list',
     'errors' => '/error/:code',
+    'about' => '/about/:code',
     'routes' => [
         '/topic(/:action(/:id))' => [
             'controller' => '\Suggestotron\Controller\Topics',

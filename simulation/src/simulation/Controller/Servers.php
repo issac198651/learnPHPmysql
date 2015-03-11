@@ -7,7 +7,7 @@ class Servers extends \simulation\Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->data = new \simulation\ServerData();
+        $this->data = new \simulation\Model\Servers();
     }
 
     public function listAction()
