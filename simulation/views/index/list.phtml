@@ -20,9 +20,15 @@
       echo "<td>" .$server['User'] . "</td>";
       echo "<td>" .$server['Phone'] . "</td>";
       echo "<td>" .$server['Comment'] . "</td>";
-      echo "<td><a href='/server/edit/" .$server['serverID']. "' class='btn btn-primary'>Edit</a>";
+      echo "<td><a href='/server/edit/" .$server['serverID']. "' class='btn btn-primary'>";
+      echo "<span class='glyphicon glyphicon-edit'></span>";
+      echo "<strong>Edit</strong>";
+      echo "</a>";
       echo " ";
-      echo "<a href='/server/delete/" .$server['serverID']. "' class='btn btn-danger' data-toggle='popover' data-trigger='hover' data-placement='top' data-title='Are you sure?' data-content=' This cannot be undone!'>Delete</a>";
+      echo "<a href='/server/delete/" .$server['serverID']. "' class='btn btn-danger' data-toggle='popover' data-trigger='hover' data-placement='top' data-title='Are you sure?' data-content=' This cannot be undone!'>";
+      echo "<span class='glyphicon glyphicon-remove'></span>";
+      echo "<strong>Delete</strong>";
+      echo "</a>";
       echo "</td>";
       echo "</tr>";
     }

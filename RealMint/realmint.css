@@ -1,0 +1,10 @@
+body {
+overflow-x: hidden;
+overflow-y: scroll;
+background: black;
+}
+#terminal {
+background: black;
+color: silver;
+font-size: 12pt;
+} 
